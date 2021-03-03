@@ -2,7 +2,6 @@ from neo4j import GraphDatabase
 import json
 import os
 
-
 def draw(keyword):
 
     if os.path.isfile('trace.json'):
@@ -73,23 +72,10 @@ def draw(keyword):
             uid = uid + 1
 
         links.append({'source': node_ids[sub], 'target': node_ids[obj], 'type': pred, 'sent': sentence})
-    #     if (node_ids[sub], node_ids[obj]) not in links_st:
-    #         links_st.add((node_ids[sub], node_ids[obj]))
-    #         links_temp.append([node_ids[sub], node_ids[obj], [pred], [sentence]])
-    #     else:
-    #         for link in links_temp:
-    #             if link[0] == node_ids[sub] and link[1] == node_ids[obj]:
-    #                 link[2].append(pred)
-    #                 link[3].append(sentence)
-    #
-    # print("실험중")
-    # print(links)
-    # print(links_temp)
+
     for name, id in node_ids.items():
         nodes.append({'id': id, 'name': name})
 
-    # graph_file = 'graph'+str(socket.gethostname())+'.json'
-    # trace_file = 'trace'+str(socket.gethostname())+'.json'
     with open('graph.json', 'w') as f:
         json.dump({'nodes': nodes, 'links': links}, f, indent=4,)
     with open('trace.json', 'w') as f:
