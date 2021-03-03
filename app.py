@@ -43,7 +43,7 @@ def get_json(filename):
     limiter = filename[filename.find("::")+2:filename.find("**")]
     entity = filename[:filename.find("::")]
     draw_graph.new_draw(entity, limiter, filter)
-    with open("graph.json", 'r') as f:
+    with open('graph.json', 'r') as f:
         return f.read()
     #도전
 

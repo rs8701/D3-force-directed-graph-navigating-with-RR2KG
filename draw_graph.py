@@ -2,9 +2,13 @@ from neo4j import GraphDatabase
 import json
 import os
 
+
 def draw(keyword):
+
     if os.path.isfile('trace.json'):
-        os.remove("trace.json")
+        os.remove('trace.json')
+    if os.path.isfile('graph.json'):
+        os.remove('graph.json')
     uri = "bolt://localhost:7687"
 
     driver = GraphDatabase.driver(uri, auth=("neo4j", "1234"), encrypted=False)
@@ -84,6 +88,8 @@ def draw(keyword):
     for name, id in node_ids.items():
         nodes.append({'id': id, 'name': name})
 
+    # graph_file = 'graph'+str(socket.gethostname())+'.json'
+    # trace_file = 'trace'+str(socket.gethostname())+'.json'
     with open('graph.json', 'w') as f:
         json.dump({'nodes': nodes, 'links': links}, f, indent=4,)
     with open('trace.json', 'w') as f:
@@ -96,6 +102,7 @@ def new_draw(keyword, limit, filter):
     cur_node_ids = dict() #current node/id dictionary
     cur_nodes = list() #current node/id list
     cur_links = list() #current link list
+
 
     with open('trace.json') as json_file:
         data = json.load(json_file)
