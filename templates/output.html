@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+
+<body>
+<h2>Triple Information</h2>
+
+<table border="1">
+	<th>NO</th>
+	<th>SENTENCE</th>
+	<th>SUBJECT</th>
+    <th>PREDICATE</th>
+    <th>OBJECT</th>
+{% for i in spo %}
+    <tr><!-- 첫번째 줄 시작 -->
+	    <td> {{i[0]}}</td>
+        <td>{{i[4]}}</td>
+	    <td><a href = "/entsearch/{{i[1]}}">{{i[1]}}</a><br>
+            <a href = "/graphvis/{{i[1]}}" onclick="window.name='MemberServlet.do';window.open(this.href, 'insert',
+                    'height=' + screen.height + ',width=' + screen.width +',resizable scrollbars menubar=yes');return false;">[Graph]</a></td>
+        <td><a href = "/predsearch/{{i[2]}}">{{i[2]}}</a></td>
+        <td><a href = "/entsearch/{{i[3]}}">{{i[3]}}</a><br>
+            <a href = "/graphvis/{{i[3]}}" onclick="window.name='MemberServlet.do';window.open(this.href, 'insert',
+                    'height=' + screen.height + ',width=' + screen.width +',resizable scrollbars menubar=yes');return false;">[Graph]</a></td>
+	</tr><!-- 첫번째 줄 끝 -->
+{% endfor %}
+    </table>
+</body>
+</html>
