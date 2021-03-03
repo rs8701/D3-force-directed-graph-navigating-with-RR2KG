@@ -3,8 +3,11 @@ import json
 import os
 
 def draw(keyword):
+
     if os.path.isfile('trace.json'):
-        os.remove("trace.json")
+        os.remove('trace.json')
+    if os.path.isfile('graph.json'):
+        os.remove('graph.json')
     uri = "bolt://localhost:7687"
 
     driver = GraphDatabase.driver(uri, auth=("neo4j", "1234"), encrypted=False)
@@ -69,18 +72,7 @@ def draw(keyword):
             uid = uid + 1
 
         links.append({'source': node_ids[sub], 'target': node_ids[obj], 'type': pred, 'sent': sentence})
-    #     if (node_ids[sub], node_ids[obj]) not in links_st:
-    #         links_st.add((node_ids[sub], node_ids[obj]))
-    #         links_temp.append([node_ids[sub], node_ids[obj], [pred], [sentence]])
-    #     else:
-    #         for link in links_temp:
-    #             if link[0] == node_ids[sub] and link[1] == node_ids[obj]:
-    #                 link[2].append(pred)
-    #                 link[3].append(sentence)
-    #
-    # print("실험중")
-    # print(links)
-    # print(links_temp)
+
     for name, id in node_ids.items():
         nodes.append({'id': id, 'name': name})
 
@@ -96,6 +88,7 @@ def new_draw(keyword, limit, filter):
     cur_node_ids = dict() #current node/id dictionary
     cur_nodes = list() #current node/id list
     cur_links = list() #current link list
+
 
     with open('trace.json') as json_file:
         data = json.load(json_file)

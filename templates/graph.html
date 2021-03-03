@@ -98,7 +98,6 @@ var drag = d3.drag()
     .on("start", dragstarted)
     .on("drag", dragged)
     .on("end", dragended);
-
 d3.json("/graph/graph.json", function (error, graph) {
     if (error) throw error;
     nodes = graph.nodes
