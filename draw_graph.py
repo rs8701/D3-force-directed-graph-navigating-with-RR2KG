@@ -6,7 +6,8 @@ def draw(keyword):
     if os.path.isfile('trace.json'):
         os.remove("trace.json")
     uri = "bolt://localhost:7687"
-    driver = GraphDatabase.driver(uri, auth=None, encrypted=False)
+
+    driver = GraphDatabase.driver(uri, auth=("neo4j", "1234"), encrypted=False)
     q_results = list()
     print("1번째 그래프 탐색, 선택된 노드 키워드: {}".format(keyword))
     def entquery(tx):
@@ -107,7 +108,7 @@ def new_draw(keyword, limit, filter):
 
     uri = "bolt://localhost:7687"
     starting_uid = len(history_node_ids)
-    driver = GraphDatabase.driver(uri, auth=None, encrypted=False)
+    driver = GraphDatabase.driver(uri, auth=("neo4j", "1234"), encrypted=False)
     q_results = list()
     inputkeyword = keyword
     # if filter == "":
